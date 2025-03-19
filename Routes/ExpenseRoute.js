@@ -5,12 +5,13 @@ const {
   deleteExpense,
   editExpense,
 } = require("../Controllers/ExpenseController");
+const isAuth = require("../Middlewares/isAuth");
 
 const router = express.Router();
 
-router.post("/add/:userId", addExpense);
-router.get("/users/:userId", getExpenses);
-router.delete("/users/:userId/expenses/:expenseId", deleteExpense);
-router.patch("/expenses/:expenseId", editExpense);
+router.post("/add/:userId", isAuth, addExpense);
+router.get("/users/:userId", isAuth, getExpenses);
+router.delete("/users/:userId/expenses/:expenseId", isAuth, deleteExpense);
+router.patch("/expenses/:expenseId", isAuth, editExpense);
 
 module.exports = router;

@@ -18,6 +18,8 @@ exports.login = async (req, res) => {
   if (!user || user.password !== password) {
     return res.status(401).json({ message: "Invalid credentials" });
   } else {
-    res.json({ message: "Logged in successfully" });
+    req.session._id = user._id;
+
+    res.json({ message: "Logged in successfully", _id: user._id });
   }
 };
